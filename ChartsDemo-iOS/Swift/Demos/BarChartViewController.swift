@@ -46,7 +46,12 @@ class BarChartViewController: DemoBaseViewController {
         chartView.drawValueAboveBarEnabled = false
         
         chartView.maxVisibleCount = 60
-        
+      
+        chartView.barSettings = .init(
+          rectCorner: [.allCorners],
+          cornerRadii: CGSize(width: 8, height: 8)
+        )
+          
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 10)

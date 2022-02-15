@@ -21,6 +21,8 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
     private var _drawBarShadowEnabled = false
     
+    private var _barSettings = BarSettings(rectCorner: .allCorners, cornerRadii: .zero)
+
     internal override func initialize()
     {
         super.initialize()
@@ -183,4 +185,27 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     
     /// `true` if drawing shadows (maxvalue) for each bar is enabled, `false` ifnot
     open var isDrawBarShadowEnabled: Bool { return drawBarShadowEnabled }
+  
+    @objc open var barSettings: BarSettings
+    {
+      get { return _barSettings }
+      set
+      {
+        _barSettings = newValue
+        setNeedsDisplay()
+      }
+    }
+}
+
+extension BarChartView {
+  public class BarSettings: NSObject {
+    let rectCorner: UIRectCorner
+    let cornerRadii: CGSize
+    
+    public init(rectCorner: UIRectCorner,
+                cornerRadii: CGSize) {
+      self.rectCorner = rectCorner
+      self.cornerRadii = cornerRadii
+    }
+  }
 }
